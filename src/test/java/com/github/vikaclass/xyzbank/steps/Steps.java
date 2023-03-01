@@ -1,12 +1,15 @@
 package com.github.vikaclass.xyzbank.steps;
 
-import cucumber.api.PendingException;
+import com.github.vikaclass.xyzbank.pages.CustomerPage;
+import com.github.vikaclass.xyzbank.pages.HomePage;
 import cucumber.api.java.ru.Дано;
 import cucumber.api.java.ru.И;
 import cucumber.api.java.ru.Когда;
 import cucumber.api.java.ru.Тогда;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.util.concurrent.TimeUnit;
 
 public class Steps {
     static { //TODO перенести в правильное место
@@ -15,16 +18,21 @@ public class Steps {
     WebDriver driver = new ChromeDriver();
     @Дано("^пользователь зашел на сайт$")
     public void userGoesToSite() {
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login");
     }
 
     @И("^залогинился$")
     public void userLogins() {
+        HomePage homePage = new HomePage(driver);
+        homePage.clickCustomerLogin();
     }
 
     @И("^выбрал имя \"([^\"]*)\" и нажал кнопку логин$")
     public void maidLogin(String arg0) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        CustomerPage customerPage = new CustomerPage(driver);
+        customerPage.makeLogin(arg0);
+
     }
 
     @Когда("^пользователь выбрал Deposit$")
@@ -45,8 +53,7 @@ public class Steps {
 
     @И("^отобразилось сообщение \"([^\"]*)\"$")
     public void showMessage(String arg0) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+
     }
 
 

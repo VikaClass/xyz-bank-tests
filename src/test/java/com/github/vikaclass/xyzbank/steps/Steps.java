@@ -1,11 +1,13 @@
 package com.github.vikaclass.xyzbank.steps;
 
+import com.github.vikaclass.xyzbank.pages.AccountPage;
 import com.github.vikaclass.xyzbank.pages.CustomerPage;
 import com.github.vikaclass.xyzbank.pages.HomePage;
 import cucumber.api.java.ru.Дано;
 import cucumber.api.java.ru.И;
 import cucumber.api.java.ru.Когда;
 import cucumber.api.java.ru.Тогда;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -37,22 +39,34 @@ public class Steps {
 
     @Когда("^пользователь выбрал Deposit$")
     public void userSelectedDeposit() {
+        AccountPage accountPage = new AccountPage(driver);
+        accountPage.clickDepositTab();
     }
 
     @И("^ввел сумму (\\d+)$")
     public void fillAmount(int arg0) {
+        AccountPage accountPage = new AccountPage(driver);
+        accountPage.fillAmount(arg0);
     }
 
     @И("^нажал кнопку Deposit$")
     public void clickDepositButton() {
+        AccountPage accountPage = new AccountPage(driver);
+        accountPage.clickDeposit();
     }
 
-    @Тогда("^произведено пополнение баланса на (\\d+)$")
-    public void balanceIncreased(int arg0) {
+    @Тогда("^на балансе (\\d+) денег$")
+    public void balanceIncreased(int expected) {
+        AccountPage accountPage = new AccountPage(driver);
+        int balance = accountPage.getBalance();
+        Assert.assertEquals(expected,balance);
     }
 
     @И("^отобразилось сообщение \"([^\"]*)\"$")
     public void showMessage(String arg0) throws Throwable {
+        AccountPage accountPage = new AccountPage(driver);
+        boolean exits = accountPage.existSuccessMessage(arg0);
+        Assert.assertTrue(exits);
 
     }
 

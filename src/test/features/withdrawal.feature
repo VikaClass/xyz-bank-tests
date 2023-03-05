@@ -15,3 +15,13 @@
     И нажал кнопку Withdrawl
     Тогда на балансе 50000 денег
     И отобразилось сообщение "Transaction successful"
+
+  @negative
+  Сценарий: Неуспешное снятие со счета 
+    Дано пользователь зашел на сайт
+    И залогинился
+    И выбрал имя "Ron Weasly" и нажал кнопку логин
+    Когда пользователь выбрал Withdrawl
+    И ввел сумму 50000
+    И нажал кнопку Withdrawl
+    Тогда отобразилось сообщение "Transaction Failed. You can not withdraw amount more than the balance."

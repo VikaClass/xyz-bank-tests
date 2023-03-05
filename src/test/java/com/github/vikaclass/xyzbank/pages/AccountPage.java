@@ -4,8 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class AccountPage {
-    private final WebDriver driver;
+public class AccountPage extends ParentPage {
+
 
     private By depositButton = By.xpath("//*[contains(text(), 'Deposit')]");
     private By withdrawalButton = By.xpath("//*[contains(text(), 'Withdrawl')]");
@@ -20,9 +20,10 @@ public class AccountPage {
 
     private By withdrawlAmountInput = By.xpath(("//label[contains(text(), 'Amount to be Withdrawn :')]/following::input"));
 
-    public AccountPage(WebDriver driver) {
-        this.driver = driver;
+    public AccountPage(WebDriver webDriver) {
+        super(webDriver);
     }
+
 
     public void clickDepositTab() {
         WebElement depositElement = driver.findElement(depositButton);

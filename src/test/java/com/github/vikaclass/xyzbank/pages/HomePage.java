@@ -4,17 +4,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class HomePage {
-    private final WebDriver webDriver;
+public class HomePage extends ParentPage {
 
     private By customerLogin = By.xpath("//*[contains(text(), 'Customer Login')]");
 
     public HomePage(WebDriver webDriver) {
-        this.webDriver = webDriver;
+        super(webDriver);
     }
 
     public void clickCustomerLogin() {
-        WebElement customerLoginElement = webDriver.findElement(customerLogin);
+        WebElement customerLoginElement = driver.findElement(customerLogin);
         customerLoginElement.click();
 
     }

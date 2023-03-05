@@ -3,6 +3,8 @@ package com.github.vikaclass.xyzbank.steps;
 import com.github.vikaclass.xyzbank.pages.AccountPage;
 import com.github.vikaclass.xyzbank.pages.CustomerPage;
 import com.github.vikaclass.xyzbank.pages.HomePage;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.java.ru.Дано;
 import cucumber.api.java.ru.И;
 import cucumber.api.java.ru.Когда;
@@ -14,10 +16,20 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
 
 public class Steps {
-    static { //TODO перенести в правильное место
+
+    WebDriver driver;
+
+    @Before
+    public void before(){
         System.setProperty("webdriver.chrome.driver", "C:\\drivers\\chromedriver110\\chromedriver.exe");
+        driver = new ChromeDriver();
     }
-    WebDriver driver = new ChromeDriver();
+
+    @After
+    public void after(){
+        driver.close();
+    }
+
     @Дано("^пользователь зашел на сайт$")
     public void userGoesToSite() {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -73,6 +85,10 @@ public class Steps {
 
     @Тогда("^баланс остался нулевым$")
     public void balanceIsZero() {
+        AccountPage accountPage = new AccountPage(driver);
+        int balance = accountPage.getBalance();
+        Assert.assertEquals(0, balance);
+
     }
 
 }

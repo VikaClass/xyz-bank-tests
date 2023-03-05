@@ -45,7 +45,8 @@ public class AccountPage {
 
     public boolean existSuccessMessage(String message) {
         WebElement successMessage = driver.findElement(successMessageSelector);
-        boolean result = successMessage.getText().equalsIgnoreCase(message);
+        String text = successMessage.getText();
+        boolean result = text.equalsIgnoreCase(message);
         return result;
     }
 }

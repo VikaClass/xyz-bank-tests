@@ -18,6 +18,8 @@ public class AccountPage {
 
     private By successMessageSelector = By.xpath("//*[@class='error ng-binding']");
 
+    private By withdrawlAmountInput = By.xpath(("//label[contains(text(), 'Amount to be Withdrawn :')]/following::input"));
+
     public AccountPage(WebDriver driver) {
         this.driver = driver;
     }
@@ -59,5 +61,10 @@ public class AccountPage {
     public void clickWithdrawal() {
         WebElement withdrawlSubmit = driver.findElement(submitButtonSelector);
         withdrawlSubmit.click();
+    }
+
+    public void fillWithdrawlAmount(int withdrawlAmount) {
+        WebElement amountWithdrawlElement = driver.findElement(withdrawlAmountInput);
+        amountWithdrawlElement.sendKeys("" + withdrawlAmount);
     }
 }

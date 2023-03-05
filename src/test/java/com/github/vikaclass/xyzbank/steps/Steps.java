@@ -103,4 +103,10 @@ public class Steps {
         AccountPage accountPage = new AccountPage(driver);
         accountPage.clickWithdrawal();
     }
+
+    @И("^хочет снять (\\d+)$")
+    public void wantWithdrawl(int withdrawlAmount) {
+        AccountPage accountPage = new AccountPage(driver);
+        accountPage.fillWithdrawlAmount(withdrawlAmount);
+    }
 }

@@ -8,10 +8,11 @@ public class AccountPage {
     private final WebDriver driver;
 
     private By depositButton = By.xpath("//*[contains(text(), 'Deposit')]");
+    private By withdrawalButton = By.xpath("//*[contains(text(), 'Withdrawl')]");
 
     private By amountInput = By.xpath("//input[@type=\"number\"]");
 
-    private By depositSubmitSelector = By.xpath("//button[@type=\"submit\"]");
+    private By submitButtonSelector = By.xpath("//button[@type=\"submit\"]");
 
     private By balance = By.xpath("//*[contains(text(), 'Account Number : ')]/strong[2]");
 
@@ -32,7 +33,7 @@ public class AccountPage {
     }
 
     public void clickDeposit() {
-        WebElement depositSubmit = driver.findElement(depositSubmitSelector);
+        WebElement depositSubmit = driver.findElement(submitButtonSelector);
         depositSubmit.click();
     }
 
@@ -48,5 +49,15 @@ public class AccountPage {
         String text = successMessage.getText();
         boolean result = text.equalsIgnoreCase(message);
         return result;
+    }
+
+    public void clickWithdrawalTab() {
+        WebElement withdrawalTab = driver.findElement(withdrawalButton);
+        withdrawalTab.click();
+    }
+
+    public void clickWithdrawal() {
+        WebElement withdrawlSubmit = driver.findElement(submitButtonSelector);
+        withdrawlSubmit.click();
     }
 }

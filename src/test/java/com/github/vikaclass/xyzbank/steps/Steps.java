@@ -23,6 +23,7 @@ public class Steps {
     public void before(){
         System.setProperty("webdriver.chrome.driver", "C:\\drivers\\chromedriver110\\chromedriver.exe");
         driver = new ChromeDriver();
+        driver.manage().deleteAllCookies();
     }
 
     @After
@@ -91,4 +92,15 @@ public class Steps {
 
     }
 
+    @Когда("^пользователь выбрал Withdrawl$")
+    public void userSelectedWithdrawal() {
+      AccountPage accountPage = new AccountPage(driver);
+      accountPage.clickWithdrawalTab();
+    }
+
+    @И("^нажал кнопку Withdrawl$")
+    public void clickWithdrawlButton() {
+        AccountPage accountPage = new AccountPage(driver);
+        accountPage.clickWithdrawal();
+    }
 }
